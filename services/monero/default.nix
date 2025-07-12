@@ -13,5 +13,13 @@
       download = 100;
       syncSize = 2;
     };
+
+    # Homepage metadata
+    homepage = {
+      name = "Monero Node";
+      description = "Monero daemon with mining";
+      port = 18081;
+      icon = "monero";
+    };
   };
 }

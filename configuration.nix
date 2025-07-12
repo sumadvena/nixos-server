@@ -8,7 +8,6 @@
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./disko
-    ./services
   ];
 
   hardware.graphics = {
@@ -81,7 +80,6 @@
     git
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
-    stow
     jellyfin
     jellyfin-web
     jellyfin-ffmpeg
@@ -99,66 +97,9 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-  services.jellyfin = {
-    enable = true;
-    openFirewall = true;
-    user = "nixtpad";
-  };
-  services.immich = {
-    enable = true;
-    port = 2283;
-    host = "0.0.0.0";
-    openFirewall = true;
-    accelerationDevices = null;
-  };
-
-  services.invidious = {
-    enable = true;
-    port = 8090;
-    sig-helper.enable = true;
-  };
-  services.stirling-pdf.enable = true;
-  services.monero = { enable = true; };
-  services.homepage-dashboard = {
-    enable = true;
-    listenPort = 8028;
-    openFirewall = true;
-    allowedHosts = "*";
-    services = [
-      {
-        "My First Group" = [{
-          "My First Immich" = {
-            description = "Homepage is awesome";
-            href = "http://192.168.1.12:2283";
-          };
-        }];
-      }
-      {
-        "My Second Group" = [
-          {
-            "My Second Jellyfin" = {
-              description = "Homepage is the best";
-              href = "http://192.168.1.12:8096";
-            };
-          }
-          {
-            "My Second Invidous" = {
-              description = "Homepage is the best";
-              href = "http://192.168.1.12:8090";
-            };
-          }
-        ];
-      }
-    ];
-  };
-  environment.etc."paperless-admin-pass".text = "admin";
-  services.paperless = {
-    enable = true;
-    passwordFile = "/etc/paperless-admin-pass";
-  };
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ config.services.invidious.port ];
+  # networking.firewall.allowedTCPPorts = [ config.services.invidious.port ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
